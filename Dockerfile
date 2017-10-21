@@ -4,5 +4,5 @@ WORKDIR /app
 
 RUN apk add --no-cache python3
 
-ADD . .
+ADD src .
 
