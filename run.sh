@@ -2,6 +2,8 @@
 
 docker build -t wine-dataset .
 docker run \
-  -v ${PWD}/graphs:/graphs \
+  -v ${PWD}/src:/app/src:ro \
+  -v ${PWD}/data:/app/data \
+  -v ${PWD}/graphs:/app/graphs \
   -it wine-dataset
 

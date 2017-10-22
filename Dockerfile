@@ -25,5 +25,3 @@ RUN apk update && \
   apk del openblas-dev && \
   apk del g++
 
-ADD src .
-
