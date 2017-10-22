@@ -2,23 +2,27 @@ FROM alpine:3.6
 
 WORKDIR /app
 
-RUN apk update \
-  && apk add \
-    ca-certificates \
-    libstdc++ \
-    libgfortran \
-    python3 \
-    openblas \
-    lapack \
-  && apk add --virtual=build_dependencies \
-    gfortran \
-    g++ \
-    make \
-    openblas-dev \
-    python3-dev
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-RUN python3 -m pip install --upgrade pip
-RUN pip3 install numpy scipy scikit-learn
+RUN apk update && \
+  apk add \
+    g++ \
+    openblas-dev \
+    py-numpy-dev \
+    libpng-dev \
+    freetype \
+    freetype-dev \
+    python3 \
+    py-scipy && \
+  python3 -m pip install --upgrade pip && \
+  pip3 install matplotlib && \
+  pip3 install pandas && \
+  pip3 install seaborn && \
+  pip3 install scikit-learn && \
+  apk del freetype-dev && \
+  apk del py-numpy-dev && \
+  apk del openblas-dev && \
+  apk del g++
 
 ADD src .
 
