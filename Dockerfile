@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:edge
 
 WORKDIR /app
 
@@ -12,6 +12,7 @@ RUN apk update && \
     libpng-dev \
     freetype \
     freetype-dev \
+    ca-certificates \
     python3 \
     py-scipy && \
   python3 -m pip install --upgrade pip && \
