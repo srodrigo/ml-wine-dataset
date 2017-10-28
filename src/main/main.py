@@ -12,7 +12,7 @@ parser.add_argument('graphs_folder', type=str, help='graphs folder')
 args = parser.parse_args()
 
 columns = [
-    'Unknown',
+    'Class',
     'Alcohol',
     'Malic acid',
     'Ash',
