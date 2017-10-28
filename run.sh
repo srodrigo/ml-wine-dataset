@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p graphs
+
 docker build -t wine-dataset .
 docker run \
   -v ${PWD}/src:/app/src:ro \
