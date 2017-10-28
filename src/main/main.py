@@ -2,6 +2,7 @@
 import pandas as pd
 import seaborn as sns
 import argparse
+import matplotlib.pyplot as plt
 
 
 parser = argparse.ArgumentParser(
@@ -23,12 +24,22 @@ columns = [
     'Proanthocyanins',
     'Color intensity',
     'Hue',
-    'OD280/OD315 of diluted wines',
+    'OD280/OD315',
     'Proline'
 ]
 
 print('Loading data...')
 wine_data = pd.read_csv(args.input_data_file, names=columns)
+
+print('Generating box plot...')
+plt.figure(figsize=(25, 9))
+wine_boxplot = sns.boxplot(data=wine_data)
+wine_boxplot.get_figure().savefig(args.graphs_folder + 'wine-boxplot.png')
+
+print('Generating dist plot...')
+the_hist = wine_data.hist(figsize=(16, 12))
+plt.savefig(args.graphs_folder + 'wine-hist.png')
+
 print('Generating pair plot...')
 wine_pairplot = sns.pairplot(wine_data)
-wine_pairplot.savefig(args.graphs_folder + 'wine.png')
+wine_pairplot.savefig(args.graphs_folder + 'wine-pairplot.png')
