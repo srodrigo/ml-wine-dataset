@@ -38,12 +38,12 @@ plt.show()
 plt.savefig(args.graphs_folder + 'wine-boxplot.png')
 
 print('Generating dist plot...')
-wine_data.hist(figsize=(16, 12))
+wine_data.hist(bins=30, figsize=(16, 12))
 plt.show()
 plt.savefig(args.graphs_folder + 'wine-hist.png')
 
 print('Generating dist plot grouped by class...')
-wine_hist_by_class = wine_data.groupby('Class').hist(figsize=(16, 12))
+wine_hist_by_class = wine_data.groupby('Class').hist(bins=30, figsize=(16, 12))
 for wine_class, wine_hist in zip((1, 2, 3), wine_hist_by_class):
     fig = wine_hist[0, 0].get_figure()
     plt.title('Class: %d' % wine_class, fontsize=20)
