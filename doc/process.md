@@ -21,7 +21,7 @@ Others aren't that clear
 ### Feature-Class Relationships (Distribution plot)
 If graphs for a feature-class have the same distributions for the different values of the class, this feature is useful for discriminating the class.
 
-TODO
+Total phenols seem to have a similar distribution for all class values.
 
 ### Feature-Feature Relationships (Pair plot)
 Attributes that are highly correlated could be redundant.
@@ -40,9 +40,12 @@ Possible correlations:
   * Hue - OD280/OD315
   * Total phenols - OD280/OD315
 
+Maybe try to remove Alcohol and Flavanoids later and see if we get more accuracy.
+
 ## Prepare data
 
 ### Fix missing data
+There is no missing data.
 
 ### Remove outliers
 
