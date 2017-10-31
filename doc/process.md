@@ -9,7 +9,14 @@ https://archive.ics.uci.edu/ml/datasets/Wine
 ### Feature Distributions (Box plot and Distribution plot)
 We can see that there is a big difference in scale. *Proline* has the widest range of values. This means that our model will need feature scaling/normalisation.
 
-There doesn't seem to be any outliers.
+There seem to be some outliers in:
+  * Magnesium
+  * Ash
+  * Alcalinity of ash
+  * Malic acid
+  * Proanthocyanins
+  * Color intensity
+  * Hue
 
 There doesn't seem to be any missing values.
 
