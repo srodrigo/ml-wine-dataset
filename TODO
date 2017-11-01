@@ -1,0 +1,5 @@
+How to detect outliers better?
+
+Convert main.py into visualization.py. Have files for different steps? Such as one for data manipulation, another one for models trial, another one for the final model, etc
+
+Try to apply PCA to see redundant attributes?
