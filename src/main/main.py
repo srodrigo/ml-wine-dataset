@@ -31,6 +31,12 @@ columns = [
 print('Loading data...')
 wine_data = pd.read_csv(args.input_data_file, names=columns)
 
+print('Data shape')
+print(wine_data.shape)
+
+print('Statistics')
+print(wine_data.describe())
+
 print('Generating box plot...')
 plt.figure(figsize=(25, 9))
 wine_boxplot = sns.boxplot(data=wine_data)
