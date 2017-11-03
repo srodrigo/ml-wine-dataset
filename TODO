@@ -6,3 +6,6 @@ Actually, is it better to have different scripts for different experiments? prob
 Try to apply PCA to see resltionships in the data?
 
 Create run.sh that gives numerical options to run different Python scripts
+
+Plot classifiers comparison using scatter plot:
+http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
