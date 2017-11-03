@@ -6,6 +6,7 @@ import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -39,7 +40,7 @@ MODELS = (
     ('SVM', SVC())
 )
 
-print('Evaluating models...')
+print('\nEvaluating models...')
 results = []
 names = []
 for name, model in MODELS:
@@ -60,3 +61,13 @@ ax.yaxis.grid(True, linestyle='-', which='major', color='lightgrey',
               alpha=0.5)
 plt.show()
 plt.savefig(args.graphs_folder + 'exp1_raw-data_alg-comparison.png')
+
+print("\nMaking predictions...")
+lda = LinearDiscriminantAnalysis()
+lda.fit(X_train, y_train)
+predictions = lda.predict(X_test)
+print("Accuracy: %f" % accuracy_score(y_test, predictions))
+print("Confusion matrix:")
+print(confusion_matrix(y_test, predictions))
+print("Classification report:")
+print(classification_report(y_test, predictions))
