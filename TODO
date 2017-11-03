@@ -1,5 +1,6 @@
 How to detect outliers better?
 
 Convert main.py into visualization.py. Have files for different steps? Such as one for data manipulation, another one for models trial, another one for the final model, etc
+Actually, is it better to have different scripts for different experiments? probably... Does this mean that we should have visualisation for each experiment, or maybe not? Probably just for some of them...
 
 Try to apply PCA to see resltionships in the data?
