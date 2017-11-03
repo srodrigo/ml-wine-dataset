@@ -1,4 +1,4 @@
-COLUMNS = [
+COLUMNS = (
     'Class',
     'Alcohol',
     'Malic acid',
@@ -13,4 +13,4 @@ COLUMNS = [
     'Hue',
     'OD280/OD315',
     'Proline'
-]
+)
