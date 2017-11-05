@@ -6,5 +6,5 @@ docker run \
   -v ${PWD}/data:/app/data \
   -v ${PWD}/graphs:/app/graphs \
   wine-dataset \
-  python3 src/main/exp1_raw-data_cross-validation.py ./data/wine.data ./graphs/
+  python3 src/main/exp1_raw-data_cv.py ./data/wine.data ./graphs/
 
