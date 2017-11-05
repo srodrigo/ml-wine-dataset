@@ -62,7 +62,7 @@ ax.yaxis.grid(True, linestyle='-', which='major', color='lightgrey',
 plt.show()
 plt.savefig(args.graphs_folder + 'exp1_raw-data_alg-comparison.png')
 
-print("\nMaking predictions...")
+print("\nMaking predictions with LDA...")
 lda = LinearDiscriminantAnalysis()
 lda.fit(X_train, y_train)
 predictions = lda.predict(X_test)

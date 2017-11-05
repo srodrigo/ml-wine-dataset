@@ -43,7 +43,7 @@ print('\nEvaluating models...')
 results = []
 names = []
 for name, model in MODELS:
-    print("\nMaking predictions for %s..." % name)
+    print("\nMaking predictions with %s..." % name)
     model.fit(X_train, y_train)
     predictions = model.predict(X_test)
     print("Accuracy: %f" % accuracy_score(y_test, predictions))
