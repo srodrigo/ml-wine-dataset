@@ -68,9 +68,9 @@ There is no missing data.
 
 ### Feature engineering
 
-## Train a model
+### Feature selection
 
-## Feature selection
+## Train a model
 
 ### Spot checking
 
