@@ -4,7 +4,8 @@ import dataset
 import argparse
 
 import pandas as pd
-from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -43,9 +44,28 @@ print('\nEvaluating models...')
 results = []
 names = []
 for name, model in MODELS:
-    print("\nMaking predictions for %s..." % name)
-    model.fit(X_train, y_train)
-    predictions = model.predict(X_test)
-    print("Accuracy: %f" % accuracy_score(y_test, predictions))
-    print(confusion_matrix(y_test, predictions))
-    print(classification_report(y_test, predictions))
+    names.append(name)
+
+    kfold = KFold(n_splits=10, random_state=SEED)
+    cv_score = cross_val_score(
+            model, X_train, y_train, cv=kfold, scoring='accuracy')
+    results.append(cv_score)
+    print("%s: %f (%f)" % (name, cv_score.mean(), cv_score.std()))
+
+fig = plt.figure()
+fig.suptitle('Algorithm Comparison')
+ax = fig.add_subplot(111)
+plt.boxplot(results)
+ax.set_xticklabels(names)
+ax.yaxis.grid(True, linestyle='-', which='major', color='lightgrey',
+              alpha=0.5)
+plt.show()
+plt.savefig(args.graphs_folder + 'exp1_raw-data_alg-comparison.png')
+
+print("\nMaking predictions...")
+lda = LinearDiscriminantAnalysis()
+lda.fit(X_train, y_train)
+predictions = lda.predict(X_test)
+print("Accuracy: %f" % accuracy_score(y_test, predictions))
+print(confusion_matrix(y_test, predictions))
+print(classification_report(y_test, predictions))
