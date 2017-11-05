@@ -22,7 +22,7 @@ args = parser.parse_args()
 
 wine_data = pd.read_csv(args.input_data_file, names=dataset.COLUMNS)
 
-SEED = 23
+SEED = 1234
 
 X = wine_data.drop('Class', axis=1)
 y = wine_data['Class']
