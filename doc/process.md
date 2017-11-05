@@ -70,6 +70,8 @@ There is no missing data.
 
 ## Train a model
 
+## Feature selection
+
 ### Spot checking
 
 ### Select algorithm
