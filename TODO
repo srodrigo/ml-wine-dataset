@@ -7,6 +7,8 @@ Add a volume to store results
 
 [OK] Perform feature selection
 
+Try feature scaling
+
 Try to apply PCA to see relationships in the data?
 
 Create run.sh that gives numerical options to run different Python scripts
