@@ -61,7 +61,7 @@ for name, model in MODELS:
     results.append(cv_score)
     print("%s: %f (%f)" % (name, cv_score.mean(), cv_score.std()))
 
-print("\nMaking predictions with LDA...")
+print("\nMaking predictions for %s..." % name)
 lda = LinearDiscriminantAnalysis()
 lda.fit(X_train, y_train)
 predictions = lda.predict(X_test)
