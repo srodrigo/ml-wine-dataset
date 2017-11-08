@@ -3,7 +3,7 @@ How to detect outliers better?
 [OK] Convert main.py into visualization.py. Have files for different steps? Such as one for data manipulation, another one for models trial, another one for the final model, etc
 Actually, is it better to have different scripts for different experiments? probably... Does this mean that we should have visualisation for each experiment, or maybe not? Probably just for some of them...
 
-Add a volume to store results
+[OK] Add a volume to store results
 
 [OK] Perform feature selection
 

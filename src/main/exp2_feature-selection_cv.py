@@ -1,5 +1,6 @@
 #!/bin/python
 import dataset
+from results import save_model_metrics
 
 import argparse
 
@@ -21,6 +22,7 @@ parser = argparse.ArgumentParser(
         description='Provide input data file')
 parser.add_argument('input_data_file', type=str, help='input data file')
 parser.add_argument('graphs_folder', type=str, help='graphs folder')
+parser.add_argument('results_folder', type=str, help='results folder')
 args = parser.parse_args()
 
 wine_data = pd.read_csv(args.input_data_file, names=dataset.COLUMNS)
@@ -65,6 +67,19 @@ print("\nMaking predictions for %s..." % name)
 lda = LinearDiscriminantAnalysis()
 lda.fit(X_train, y_train)
 predictions = lda.predict(X_test)
-print("Accuracy: %f" % accuracy_score(y_test, predictions))
-print(confusion_matrix(y_test, predictions))
-print(classification_report(y_test, predictions))
+
+acc_score = accuracy_score(y_test, predictions)
+conf_matrix = confusion_matrix(y_test, predictions)
+class_report = classification_report(y_test, predictions)
+print("Accuracy: %f" % acc_score)
+print(conf_matrix)
+print(class_report)
+
+save_model_metrics(
+    metrics=[{
+        'model_name': 'LDA',
+        'acc_score': acc_score,
+        'conf_matrix': conf_matrix,
+        'class_report': class_report
+    }],
+    file_name=args.results_folder + 'exp2_feature-selection_cv_model.txt')

@@ -1,5 +1,6 @@
 #!/bin/python
 import dataset
+from results import save_model_metrics
 
 import argparse
 
@@ -82,15 +83,19 @@ print("Accuracy: %f" % acc_score)
 print(conf_matrix)
 print(class_report)
 
-results_file_name = args.results_folder + 'exp1_raw-data_cv_results.txt'
-with open(results_file_name, 'w') as results_file:
+cv_file_name = args.results_folder + 'exp1_raw-data_cv_cv-results.txt'
+with open(cv_file_name, 'w') as results_file:
     for res in results:
         results_file.write("%s: %f (%f)\n" % (
             res['model_name'],
             res['cv_acc_mean'],
             res['cv_acc_std']))
 
-    results_file.write("\nPredictions with LDA\n")
-    results_file.write("Accuracy: %f\n" % acc_score)
-    results_file.write(str(conf_matrix) + "\n")
-    results_file.write(class_report + "\n")
+save_model_metrics(
+    metrics=[{
+        'model_name': 'LDA',
+        'acc_score': acc_score,
+        'conf_matrix': conf_matrix,
+        'class_report': class_report
+    }],
+    file_name=args.results_folder + 'exp1_raw-data_cv_model-results.txt')

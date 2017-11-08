@@ -1,5 +1,6 @@
 #!/bin/python
 import dataset
+from results import save_model_metrics
 
 import argparse
 
@@ -19,6 +20,7 @@ parser = argparse.ArgumentParser(
         description='Provide input data file')
 parser.add_argument('input_data_file', type=str, help='input data file')
 parser.add_argument('graphs_folder', type=str, help='graphs folder')
+parser.add_argument('results_folder', type=str, help='results folder')
 args = parser.parse_args()
 
 wine_data = pd.read_csv(args.input_data_file, names=dataset.COLUMNS)
@@ -67,10 +69,6 @@ for name, model in MODELS:
     print(conf_matrix)
     print(class_report)
 
+
 results_file_name = args.results_folder + 'exp2_feature-selection.txt'
-with open(results_file_name, 'w') as results_file:
-    for res in results:
-        results_file.write("Model: %s\n" % res['model_name'])
-        results_file.write("Accuracy: %f\n" % res['acc_score'])
-        results_file.write(str(res['conf_matrix']) + "\n")
-        results_file.write(res['class_report'] + "\n")
+save_model_metrics(metrics=results, file_name=results_file_name)

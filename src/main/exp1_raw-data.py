@@ -1,5 +1,6 @@
 #!/bin/python
 import dataset
+from results import save_model_metrics
 
 import argparse
 
@@ -62,9 +63,4 @@ for name, model in MODELS:
     print(class_report)
 
 results_file_name = args.results_folder + 'exp1_raw-data_results.txt'
-with open(results_file_name, 'w') as results_file:
-    for res in results:
-        results_file.write("Model: %s\n" % res['model_name'])
-        results_file.write("Accuracy: %f\n" % res['acc_score'])
-        results_file.write(str(res['conf_matrix']) + "\n")
-        results_file.write(res['class_report'] + "\n")
+save_model_metrics(metrics=results, file_name=results_file_name)
