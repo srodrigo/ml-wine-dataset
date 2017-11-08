@@ -1,7 +1,11 @@
 #!/bin/bash
 
-mkdir -p graphs
-mkdir -p results
+data_dir='data'
+graphs_dir='graphs'
+results_dir='results'
+
+mkdir -p ./${graphs_dir}
+mkdir -p ./${results_dir}
 
 description="Enter the script to run:
 1) Data analysis
@@ -37,9 +41,9 @@ esac
 docker build -t wine-dataset .
 docker run \
   -v ${PWD}/src:/app/src:ro \
-  -v ${PWD}/data:/app/data \
-  -v ${PWD}/graphs:/app/graphs \
-  -v ${PWD}/results:/app/results \
+  -v ${PWD}/${data_dir}:/app/${data_dir} \
+  -v ${PWD}/${graphs_dir}:/app/${graphs_dir} \
+  -v ${PWD}/${results_dir}:/app/${results_dir} \
   wine-dataset \
-  python3 "src/main/${script_name}" ./data/wine.data ./graphs/ ./results/
+  python3 "src/main/${script_name}" ./${data_dir}/wine.data ./${graphs_dir}/ ./${results_dir}/
 
