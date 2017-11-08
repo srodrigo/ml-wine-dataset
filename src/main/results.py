@@ -8,3 +8,10 @@ def save_model_metrics(metrics, file_name):
             metrics_file.write("Accuracy: %f\n" % metric['acc_score'])
             metrics_file.write(str(metric['conf_matrix']) + "\n")
             metrics_file.write(metric['class_report'] + "\n")
+
+
+def print_model_metrics(metrics):
+    print("Model: %s" % metrics['model_name'])
+    print("Accuracy: %f" % metrics['acc_score'])
+    print(metrics['conf_matrix'])
+    print(metrics['class_report'])

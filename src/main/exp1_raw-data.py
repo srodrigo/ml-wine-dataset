@@ -1,6 +1,6 @@
 #!/bin/python
 import dataset
-from results import save_model_metrics
+from results import save_model_metrics, print_model_metrics
 
 import argparse
 
@@ -51,16 +51,15 @@ for name, model in MODELS:
     acc_score = accuracy_score(y_test, predictions)
     conf_matrix = confusion_matrix(y_test, predictions)
     class_report = classification_report(y_test, predictions)
-    results.append({
+    metrics = {
         'model_name': name,
         'acc_score': acc_score,
         'conf_matrix': conf_matrix,
         'class_report': class_report
-    })
+    }
+    results.append(metrics)
 
-    print("Accuracy: %f" % acc_score)
-    print(conf_matrix)
-    print(class_report)
+    print_model_metrics(metrics)
 
 results_file_name = args.results_folder + 'exp1_raw-data_results.txt'
 save_model_metrics(metrics=results, file_name=results_file_name)
