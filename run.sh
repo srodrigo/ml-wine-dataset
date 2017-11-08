@@ -1,6 +1,7 @@
 #!/bin/bash
 
 mkdir -p graphs
+mkdir -p results
 
 description="Enter the script to run:
 1) Data analysis
@@ -38,6 +39,7 @@ docker run \
   -v ${PWD}/src:/app/src:ro \
   -v ${PWD}/data:/app/data \
   -v ${PWD}/graphs:/app/graphs \
+  -v ${PWD}/results:/app/results \
   wine-dataset \
-  python3 "src/main/${script_name}" ./data/wine.data ./graphs/
+  python3 "src/main/${script_name}" ./data/wine.data ./graphs/ ./results/
 
