@@ -11,7 +11,7 @@ Try feature scaling
 
 Try to apply PCA to see relationships in the data?
 
-Create run.sh that gives numerical options to run different Python scripts
+[OK] Create run.sh that gives numerical options to run different Python scripts
 
 Plot classifiers comparison using scatter plot:
 http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
