@@ -25,7 +25,7 @@ case $script_number in
         script_name='exp1_raw-data.py'
         ;;
     3)
-        script_name='exp1_raw-data.py'
+        script_name='exp1_raw-data_cv.py'
         ;;
     4)
         script_name='exp2_feature-selection.py'
