@@ -20,12 +20,15 @@ case $script_number in
         script_name='exp1_raw-data.py'
         ;;
     3)
-        script_name='exp2_feature-selection.py'
+        script_name='exp1_raw-data.py'
         ;;
     4)
-        script_name='exp2_feature-selection_cv.py'
+        script_name='exp2_feature-selection.py'
         ;;
     5)
+        script_name='exp2_feature-selection_cv.py'
+        ;;
+    6)
         script_name='exp3_param-tuning.py'
         ;;
 esac
