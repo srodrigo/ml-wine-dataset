@@ -8,7 +8,6 @@ import argparse
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import SelectKBest, chi2
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier

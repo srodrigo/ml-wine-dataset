@@ -10,7 +10,6 @@ from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 from sklearn.pipeline import FeatureUnion
 from sklearn.feature_selection import SelectKBest
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
