@@ -1,9 +1,8 @@
 #!/bin/python
 import dataset
+import inputs
 from results import save_model_metrics, print_model_metrics
 from models import predict, calculate_metrics
-
-import argparse
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -16,12 +15,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 
-parser = argparse.ArgumentParser(
-        description='Provide input data file')
-parser.add_argument('input_data_file', type=str, help='input data file')
-parser.add_argument('graphs_folder', type=str, help='graphs folder')
-parser.add_argument('results_folder', type=str, help='results folder')
-args = parser.parse_args()
+args = inputs.parse_args()
 
 wine_data = pd.read_csv(args.input_data_file, names=dataset.COLUMNS)
 
