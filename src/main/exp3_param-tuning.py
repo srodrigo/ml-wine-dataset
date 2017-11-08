@@ -1,13 +1,13 @@
 #!/bin/python
 import dataset
 from results import save_model_metrics, print_model_metrics
+from models import predict, calculate_metrics
 
 import argparse
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.svm import SVC
 
 
@@ -34,18 +34,10 @@ param_grid = {
         'gamma': [1, 0.1, 0.01, 0.001],
         'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
 grid = GridSearchCV(SVC(), param_grid, refit=True, verbose=3)
-grid.fit(X_train, y_train)
-predictions = grid.predict(X_test)
+predictions = predict(grid, X_train, y_train, X_test, y_test)
+metrics = calculate_metrics(y_test, predictions)
+metrics['model_name'] = 'LDA'
 
-acc_score = accuracy_score(y_test, predictions)
-conf_matrix = confusion_matrix(y_test, predictions)
-class_report = classification_report(y_test, predictions)
-metrics = {
-    'model_name': 'LDA',
-    'acc_score': acc_score,
-    'conf_matrix': conf_matrix,
-    'class_report': class_report
-}
 print_model_metrics(metrics)
 
 save_model_metrics(

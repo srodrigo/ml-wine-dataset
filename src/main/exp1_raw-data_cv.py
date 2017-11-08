@@ -1,6 +1,7 @@
 #!/bin/python
 import dataset
 from results import save_model_metrics, print_model_metrics
+from models import predict, calculate_metrics
 
 import argparse
 
@@ -73,18 +74,12 @@ plt.show()
 plt.savefig(args.graphs_folder + 'exp1_raw-data_alg-comparison.png')
 
 print("\nMaking predictions with LDA...")
+
 lda = LinearDiscriminantAnalysis()
-lda.fit(X_train, y_train)
-predictions = lda.predict(X_test)
-acc_score = accuracy_score(y_test, predictions)
-conf_matrix = confusion_matrix(y_test, predictions)
-class_report = classification_report(y_test, predictions)
-metrics = {
-    'model_name': 'LDA',
-    'acc_score': acc_score,
-    'conf_matrix': conf_matrix,
-    'class_report': class_report
-}
+predictions = predict(lda, X_train, y_train, X_test, y_test)
+metrics = calculate_metrics(y_test, predictions)
+metrics['model_name'] = 'LDA'
+
 print_model_metrics(metrics)
 
 cv_file_name = args.results_folder + 'exp1_raw-data_cv_cv-results.txt'

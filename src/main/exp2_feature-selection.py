@@ -1,6 +1,7 @@
 #!/bin/python
 import dataset
 from results import save_model_metrics, print_model_metrics
+from models import predict, calculate_metrics
 
 import argparse
 
@@ -51,18 +52,9 @@ X_test = best_features.transform(X_test)
 results = []
 for name, model in MODELS:
     print("\nMaking predictions with %s..." % name)
-    model.fit(X_train, y_train)
-    predictions = model.predict(X_test)
-
-    acc_score = accuracy_score(y_test, predictions)
-    conf_matrix = confusion_matrix(y_test, predictions)
-    class_report = classification_report(y_test, predictions)
-    metrics = {
-        'model_name': name,
-        'acc_score': acc_score,
-        'conf_matrix': conf_matrix,
-        'class_report': class_report
-    }
+    predictions = predict(model, X_train, y_train, X_test, y_test)
+    metrics = calculate_metrics(y_test, predictions)
+    metrics['model_name'] = name
     results.append(metrics)
 
     print_model_metrics(metrics)
