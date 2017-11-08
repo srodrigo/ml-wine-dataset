@@ -19,6 +19,7 @@ parser = argparse.ArgumentParser(
         description='Provide input data file')
 parser.add_argument('input_data_file', type=str, help='input data file')
 parser.add_argument('graphs_folder', type=str, help='graphs folder')
+parser.add_argument('results_folder', type=str, help='results folder')
 args = parser.parse_args()
 
 wine_data = pd.read_csv(args.input_data_file, names=dataset.COLUMNS)
@@ -42,6 +43,7 @@ MODELS = (
 
 print('\nEvaluating models...')
 results = []
+scores = []
 names = []
 for name, model in MODELS:
     names.append(name)
@@ -49,13 +51,20 @@ for name, model in MODELS:
     kfold = KFold(n_splits=10, random_state=SEED)
     cv_score = cross_val_score(
             model, X_train, y_train, cv=kfold, scoring='accuracy')
-    results.append(cv_score)
-    print("%s: %f (%f)" % (name, cv_score.mean(), cv_score.std()))
+    scores.append(cv_score)
+    cv_score_mean = cv_score.mean()
+    cv_score_std = cv_score.std()
+    results.append({
+        'model_name': name,
+        'cv_acc_mean': cv_score_mean,
+        'cv_acc_std': cv_score_std
+    })
+    print("%s: %f (%f)" % (name, cv_score_mean, cv_score_std))
 
 fig = plt.figure()
 fig.suptitle('Algorithm Comparison')
 ax = fig.add_subplot(111)
-plt.boxplot(results)
+plt.boxplot(scores)
 ax.set_xticklabels(names)
 ax.yaxis.grid(True, linestyle='-', which='major', color='lightgrey',
               alpha=0.5)
@@ -66,6 +75,22 @@ print("\nMaking predictions with LDA...")
 lda = LinearDiscriminantAnalysis()
 lda.fit(X_train, y_train)
 predictions = lda.predict(X_test)
-print("Accuracy: %f" % accuracy_score(y_test, predictions))
-print(confusion_matrix(y_test, predictions))
-print(classification_report(y_test, predictions))
+acc_score = accuracy_score(y_test, predictions)
+conf_matrix = confusion_matrix(y_test, predictions)
+class_report = classification_report(y_test, predictions)
+print("Accuracy: %f" % acc_score)
+print(conf_matrix)
+print(class_report)
+
+results_file_name = args.results_folder + 'exp1_raw-data_cv_results.txt'
+with open(results_file_name, 'w') as results_file:
+    for res in results:
+        results_file.write("%s: %f (%f)\n" % (
+            res['model_name'],
+            res['cv_acc_mean'],
+            res['cv_acc_std']))
+
+    results_file.write("\nPredictions with LDA\n")
+    results_file.write("Accuracy: %f\n" % acc_score)
+    results_file.write(str(conf_matrix) + "\n")
+    results_file.write(class_report + "\n")
