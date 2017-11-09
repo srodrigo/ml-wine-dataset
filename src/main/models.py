@@ -5,6 +5,23 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+
+
+SPOT_CHECK_MODELS = (
+    ('LR', LogisticRegression()),
+    ('LDA', LinearDiscriminantAnalysis()),
+    ('KN', KNeighborsClassifier()),
+    ('CART', DecisionTreeClassifier()),
+    ('NB', GaussianNB()),
+    ('SVM', SVC())
+)
+
 
 def predict(model, X_train, y_train, X_test, y_test):
     model.fit(X_train, y_train)

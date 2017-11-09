@@ -8,16 +8,12 @@ from results import print_cv_metrics
 from models import predict
 from models import calculate_metrics
 from models import calculate_cv_score
+from models import SPOT_CHECK_MODELS
 
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
 
 
 args = inputs.parse_args()
@@ -32,20 +28,11 @@ y = wine_data['Class']
 X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.20, random_state=SEED)
 
-MODELS = (
-    ('LR', LogisticRegression()),
-    ('LDA', LinearDiscriminantAnalysis()),
-    ('KN', KNeighborsClassifier()),
-    ('CART', DecisionTreeClassifier()),
-    ('NB', GaussianNB()),
-    ('SVM', SVC())
-)
-
 print('\nEvaluating models...')
 results = []
 scores = []
 names = []
-for name, model in MODELS:
+for name, model in SPOT_CHECK_MODELS:
     names.append(name)
 
     cv_score = calculate_cv_score(
