@@ -2,10 +2,12 @@
 import dataset
 import inputs
 from results import save_model_metrics, print_model_metrics
-from models import predict, calculate_metrics
+from models import predict
+from models import calculate_metrics
+from models import calculate_cv_score
 
 import pandas as pd
-from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.pipeline import FeatureUnion
 from sklearn.feature_selection import SelectKBest
@@ -51,10 +53,16 @@ for name, model in MODELS:
     estimators.append(('model', model))
     pipeline_model = Pipeline(estimators)
 
-    kfold = KFold(n_splits=10, random_state=SEED)
-    cv_score = cross_val_score(
-            pipeline_model, X_train, y_train, cv=kfold, scoring='accuracy')
-    results.append(cv_score)
+    cv_score = calculate_cv_score(
+            model, X_train, y_train, SEED, n_splits=10)
+    cv_score_mean = cv_score.mean()
+    cv_score_std = cv_score.std()
+    res = {
+        'model_name': name,
+        'cv_acc_mean': cv_score_mean,
+        'cv_acc_std': cv_score_std
+    }
+    results.append(res)
     print("%s: %f (%f)" % (name, cv_score.mean(), cv_score.std()))
 
 print("\nMaking predictions for LDA")

@@ -2,11 +2,13 @@
 import dataset
 import inputs
 from results import save_model_metrics, print_model_metrics
-from models import predict, calculate_metrics
+from models import predict
+from models import calculate_metrics
+from models import calculate_cv_score
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -43,17 +45,17 @@ names = []
 for name, model in MODELS:
     names.append(name)
 
-    kfold = KFold(n_splits=10, random_state=SEED)
-    cv_score = cross_val_score(
-            model, X_train, y_train, cv=kfold, scoring='accuracy')
+    cv_score = calculate_cv_score(
+            model, X_train, y_train, SEED, n_splits=10)
     scores.append(cv_score)
     cv_score_mean = cv_score.mean()
     cv_score_std = cv_score.std()
-    results.append({
+    res = {
         'model_name': name,
         'cv_acc_mean': cv_score_mean,
         'cv_acc_std': cv_score_std
-    })
+    }
+    results.append(res)
     print("%s: %f (%f)" % (name, cv_score_mean, cv_score_std))
 
 fig = plt.figure()
