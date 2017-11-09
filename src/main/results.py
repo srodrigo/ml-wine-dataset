@@ -15,3 +15,10 @@ def print_model_metrics(metrics):
     print("Accuracy: %f" % metrics['acc_score'])
     print(metrics['conf_matrix'])
     print(metrics['class_report'])
+
+
+def print_cv_metrics(metrics):
+    print("%s: %f (%f)" % (
+        metrics['model_name'],
+        metrics['cv_acc_mean'],
+        metrics['cv_acc_std']))

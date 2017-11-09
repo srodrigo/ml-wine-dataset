@@ -1,7 +1,9 @@
 #!/bin/python
 import dataset
 import inputs
-from results import save_model_metrics, print_model_metrics
+from results import save_model_metrics
+from results import print_model_metrics
+from results import print_cv_metrics
 from models import predict
 from models import calculate_metrics
 from models import calculate_cv_score
@@ -57,13 +59,13 @@ for name, model in MODELS:
             model, X_train, y_train, SEED, n_splits=10)
     cv_score_mean = cv_score.mean()
     cv_score_std = cv_score.std()
-    res = {
+    metrics = {
         'model_name': name,
         'cv_acc_mean': cv_score_mean,
         'cv_acc_std': cv_score_std
     }
-    results.append(res)
-    print("%s: %f (%f)" % (name, cv_score.mean(), cv_score.std()))
+    results.append(metrics)
+    print_cv_metrics(metrics)
 
 print("\nMaking predictions for LDA")
 lda = LinearDiscriminantAnalysis()
