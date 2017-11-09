@@ -3,6 +3,7 @@ import dataset
 import inputs
 from results import save_model_metrics
 from results import print_model_metrics
+from results import save_cv_metrics
 from results import print_cv_metrics
 from models import predict
 from models import calculate_metrics
@@ -79,13 +80,9 @@ metrics['model_name'] = 'LDA'
 
 print_model_metrics(metrics)
 
-cv_file_name = args.results_folder + 'exp1_raw-data_cv_cv-results.txt'
-with open(cv_file_name, 'w') as results_file:
-    for res in results:
-        results_file.write("%s: %f (%f)\n" % (
-            res['model_name'],
-            res['cv_acc_mean'],
-            res['cv_acc_std']))
+save_cv_metrics(
+        metrics=results,
+        file_name=args.results_folder + 'exp1_raw-data_cv_cv-results.txt')
 
 save_model_metrics(
     metrics=[metrics],

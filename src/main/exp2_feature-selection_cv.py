@@ -3,6 +3,7 @@ import dataset
 import inputs
 from results import save_model_metrics
 from results import print_model_metrics
+from results import save_cv_metrics
 from results import print_cv_metrics
 from models import predict
 from models import calculate_metrics
@@ -78,3 +79,7 @@ print_model_metrics(metrics)
 save_model_metrics(
     metrics=[metrics],
     file_name=args.results_folder + 'exp2_feature-selection_cv_model.txt')
+
+save_cv_metrics(
+        metrics=results,
+        file_name=args.results_folder + 'exp2_feature-selection_cv_cv-results.txt')
