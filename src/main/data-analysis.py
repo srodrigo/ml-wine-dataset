@@ -1,17 +1,13 @@
 #!/bin/python
 import dataset
+import inputs
 
 import pandas as pd
 import seaborn as sns
-import argparse
 import matplotlib.pyplot as plt
 
 
-parser = argparse.ArgumentParser(
-        description='Provide input data file and graphs folder')
-parser.add_argument('input_data_file', type=str, help='input data file')
-parser.add_argument('graphs_folder', type=str, help='graphs folder')
-args = parser.parse_args()
+args = inputs.parse_args()
 
 print('Loading data...')
 wine_data = pd.read_csv(args.input_data_file, names=dataset.COLUMNS)
