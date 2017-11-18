@@ -44,7 +44,7 @@ for name, model in SPOT_CHECK_MODELS:
     pipeline_model = Pipeline(estimators)
 
     cv_score = calculate_cv_score(
-            model, X_train, y_train, SEED, n_splits=10)
+            pipeline_model, X_train, y_train, SEED, n_splits=10)
     cv_score_mean = cv_score.mean()
     cv_score_std = cv_score.std()
     metrics = {
