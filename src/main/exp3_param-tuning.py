@@ -30,7 +30,7 @@ param_grid = {
 grid = GridSearchCV(SVC(), param_grid, refit=True, verbose=3)
 predictions = predict(grid, X_train, y_train, X_test, y_test)
 metrics = calculate_metrics(y_test, predictions)
-metrics['model_name'] = 'LDA'
+metrics['model_name'] = 'SVM'
 
 print_model_metrics(metrics)
 
