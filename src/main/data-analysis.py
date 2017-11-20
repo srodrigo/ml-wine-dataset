@@ -9,30 +9,30 @@ import matplotlib.pyplot as plt
 
 args = inputs.parse_args()
 
-print('Loading data...')
+print('\nLoading data...')
 wine_data = pd.read_csv(args.input_data_file, names=dataset.COLUMNS)
 
-print('Data shape')
+print('\nData shape')
 print(wine_data.shape)
 
-print('Data head')
+print('\nData head')
 print(wine_data.head(10))
 
-print('Statistics')
+print('\nStatistics')
 print(wine_data.describe())
 
-print('Generating box plot...')
+print('\nGenerating box plot...')
 plt.figure(figsize=(250, 90))
 wine_boxplot = sns.boxplot(data=wine_data)
 plt.show()
 plt.savefig(args.graphs_folder + 'wine-boxplot.png')
 
-print('Generating dist plot...')
+print('\nGenerating dist plot...')
 wine_data.hist(bins=30, figsize=(16, 12))
 plt.show()
 plt.savefig(args.graphs_folder + 'wine-hist.png')
 
-print('Generating dist plot grouped by class...')
+print('\nGenerating dist plot grouped by class...')
 wine_hist_by_class = wine_data.groupby('Class').hist(bins=30, figsize=(16, 12))
 for wine_class, wine_hist in zip((1, 2, 3), wine_hist_by_class):
     fig = wine_hist[0, 0].get_figure()
@@ -41,7 +41,7 @@ for wine_class, wine_hist in zip((1, 2, 3), wine_hist_by_class):
     fig.savefig('%swine-hist-class-%d.png' % (args.graphs_folder, wine_class))
     plt.close()
 
-print('Generating pair plot...')
+print('\nGenerating pair plot...')
 wine_pairplot = sns.pairplot(wine_data)
 wine_pairplot.savefig(args.graphs_folder + 'wine-pairplot.png')
 plt.show()
