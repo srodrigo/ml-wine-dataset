@@ -15,6 +15,9 @@ wine_data = pd.read_csv(args.input_data_file, names=dataset.COLUMNS)
 print('Data shape')
 print(wine_data.shape)
 
+print('Data head')
+print(wine_data.head(10))
+
 print('Statistics')
 print(wine_data.describe())
 
