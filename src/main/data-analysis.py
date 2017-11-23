@@ -22,7 +22,7 @@ print('\nStatistics')
 print(wine_data.describe())
 
 print('\nGenerating box plot...')
-plt.figure(figsize=(250, 90))
+plt.figure(figsize=(75, 30))
 wine_boxplot = sns.boxplot(data=wine_data)
 plt.show()
 plt.savefig(args.graphs_folder + 'wine-boxplot.png')
