@@ -13,7 +13,6 @@ from models import SPOT_CHECK_MODELS
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 
 args = inputs.parse_args()
@@ -48,6 +47,11 @@ for name, model in SPOT_CHECK_MODELS:
     results.append(metrics)
     print_cv_metrics(metrics)
 
+save_cv_metrics(
+        metrics=results,
+        file_name=args.results_folder + 'exp1_raw-data_cv_cv-results.txt')
+
+print('\nPlotting algorithm comparison...')
 fig = plt.figure()
 fig.suptitle('Algorithm Comparison')
 ax = fig.add_subplot(111)
@@ -58,19 +62,17 @@ ax.yaxis.grid(True, linestyle='-', which='major', color='lightgrey',
 plt.show()
 plt.savefig(args.graphs_folder + 'exp1_raw-data_alg-comparison.png')
 
-print("\nMaking predictions with LDA...")
+print('\nPredicting...')
+test_results = []
+for name, model in SPOT_CHECK_MODELS:
+    print("\nMaking predictions with %s..." % name)
+    predictions = predict(model, X_train, y_train, X_test, y_test)
+    metrics = calculate_metrics(y_test, predictions)
+    metrics['model_name'] = name
 
-lda = LinearDiscriminantAnalysis()
-predictions = predict(lda, X_train, y_train, X_test, y_test)
-metrics = calculate_metrics(y_test, predictions)
-metrics['model_name'] = 'LDA'
-
-print_model_metrics(metrics)
-
-save_cv_metrics(
-        metrics=results,
-        file_name=args.results_folder + 'exp1_raw-data_cv_cv-results.txt')
+    test_results.append(metrics)
+    print_model_metrics(metrics)
 
 save_model_metrics(
-    metrics=[metrics],
+    metrics=test_results,
     file_name=args.results_folder + 'exp1_raw-data_cv_model-results.txt')
