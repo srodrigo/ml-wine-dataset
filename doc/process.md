@@ -63,26 +63,54 @@ Maybe try to remove Alcohol and Flavanoids later and see if we get more accuracy
 There is no missing data.
 
 ### Remove outliers
+No outliers have been removed.
 
-### Feature scaling
+### Feature regularisation
+No feature scaling/normalisation performed.
 
 ### Feature engineering
+No features added.
 
 ### Feature selection
+Automatic feature selection performed on the Experiment 2.
 
 ## Train a model
 
 ### Spot checking
+The spot checking has been performed using a few basic algorithms"
+  * Logistic Regression
+  * Linear Discriminant Analysis
+  * KNeighbors
+  * Decision Tree
+  * Naive Bayes
+  * Support Vector Machine
 
 ### Select algorithm
+After applying cross-validation, the most performant algorithm was Naive Bayes: 0.992857 (0.021429)
+
+Logistic Regression, Linear Discriminant Analysis and Decision Tree performed quite well: >0.95 (< 0.05)
 
 ## Test/Evaluate the model performance
+Predicting on the test data, the best algorithm was Linear Discriminant Analysis: 0.972222
 
 ## Improve the model performance
+In order to carry on with an interesting challenge, the improvements are going to be made on SVM (the one with the worst accuracy).
+
+In the Experiment 2, we used automatic feature selection to select the best 3 features.
 
 ### Parameters tunning
 
+In the Experiment 3, we performed a grid search with cross-validation to select the best combination of parameters for a few parameter values.
+
 ## Results
 
-* exp1
-    Same results for both with/without cross-validation
+* Experiment 1
+  Cross-validation score: 0.367
+  Accuracy: 0.611
+
+* Experiment 2
+  Cross-validation score: improved in a 11.3%, up to 0.479
+  Accuracy: improved in a 2.7%, up to 0.639
+
+* Experiment 3
+  Accuracy: improved in a 27.8%, up to 0.917
