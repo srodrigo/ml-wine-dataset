@@ -36,4 +36,4 @@ print_model_metrics(metrics)
 
 save_model_metrics(
     metrics=[metrics],
-    file_name=args.results_folder + 'exp2_feature-selection_model.txt')
+    file_name=args.results_folder + 'exp3_feature-selection_model.txt')
