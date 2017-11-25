@@ -39,6 +39,6 @@ def hist_by(
 
 
 def pairplot(data, file_name=None):
-    figure = sns.pairplot(data=data)
+    figure = sns.pairplot(data=data, diag_kind='kde')
     figure.savefig(file_name)
     plt.show()
