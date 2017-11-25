@@ -33,6 +33,7 @@ def hist_by(
         fig = hist[0, 0].get_figure()
         plt.title('%s: %d' % (by, value), fontsize=fontsize)
         fig.suptitle('%s: %d' % (by, value), fontsize=fontsize)
+        plt.show()
         if folder_name:
             fig.savefig('%shist-%s-%d.png' % (folder_name, by, value))
         plt.close()
