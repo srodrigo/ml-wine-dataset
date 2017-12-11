@@ -8,7 +8,7 @@ mkdir -p ./${graphs_dir}
 mkdir -p ./${results_dir}
 
 docker build -t wine-dataset .
-docker run \
+docker run --rm \
   -v ${PWD}/src:/app/src:ro \
   -v ${PWD}/${data_dir}:/app/${data_dir} \
   -v ${PWD}/${graphs_dir}:/app/${graphs_dir} \
