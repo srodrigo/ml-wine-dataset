@@ -23,7 +23,7 @@ SPOT_CHECK_MODELS = (
 )
 
 
-def predict(model, X_train, y_train, X_test, y_test):
+def predict(model, X_train, y_train, X_test):
     model.fit(X_train, y_train)
     return model.predict(X_test)
 

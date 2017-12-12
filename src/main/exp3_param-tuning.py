@@ -28,12 +28,4 @@ param_grid = {
         'gamma': [1, 0.1, 0.01, 0.001],
         'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
 grid = GridSearchCV(SVC(), param_grid, refit=True, verbose=3)
-predictions = predict(grid, X_train, y_train, X_test, y_test)
-metrics = calculate_metrics(y_test, predictions)
-metrics['model_name'] = 'SVM'
-
-print_model_metrics(metrics)
-
-save_model_metrics(
-    metrics=[metrics],
-    file_name=args.results_folder + 'exp3_feature-selection_model.txt')
+predictions = predict(grid, X_train, y_train, X_test)

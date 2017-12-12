@@ -57,7 +57,7 @@ for name, model in SPOT_CHECK_MODELS:
 
 print("\nMaking predictions for LDA")
 lda = LinearDiscriminantAnalysis()
-predictions = predict(lda, X_train, y_train, X_test, y_test)
+predictions = predict(lda, X_train, y_train, X_test)
 metrics = calculate_metrics(y_test, predictions)
 metrics['model_name'] = 'LDA'
 

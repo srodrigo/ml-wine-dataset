@@ -66,7 +66,7 @@ print('\nPredicting...')
 test_results = []
 for name, model in SPOT_CHECK_MODELS:
     print("\nMaking predictions with %s..." % name)
-    predictions = predict(model, X_train, y_train, X_test, y_test)
+    predictions = predict(model, X_train, y_train, X_test)
     metrics = calculate_metrics(y_test, predictions)
     metrics['model_name'] = name
 
